@@ -59,11 +59,29 @@ NEXT_PUBLIC_BACKEND_URL=https://program.rezomwen.fr/api
 MAIN_URL=https://program.rezomwen.fr
 ```
 
-Image : `ghcr.io/madakick/postiz-rezomwen-program:latest` à la place de
-`ghcr.io/gitroomhq/postiz-app:latest`, puis
-`docker compose pull && docker compose up -d`. Le conteneur écoute sur 5000
+Image : `ghcr.io/madakick/postiz-rezomwen-program:latest` (publique) à la
+place de `ghcr.io/gitroomhq/postiz-app:latest`. Le conteneur écoute sur 5000
 (nginx interne), exposé en `4007:5000` ; `/api/` → backend 3000, `/` → frontend
 4200.
+
+### Installation en place (2026-10-09)
+
+Le `docker-compose.yaml` d'origine de `/opt/postiz-app` n'est pas modifié :
+
+- `docker-compose.override.yml` (lu automatiquement par Docker Compose) :
+  image du fork et variables ci-dessus, hors secret ;
+- `.env.rezomwen` (droits 600, root) : `POSTIZ_OAUTH_CLIENT_SECRET=…`, chargé
+  par `env_file` ;
+- mise à jour : `cd /opt/postiz-app && sudo docker compose pull postiz && sudo docker compose up -d postiz` ;
+- retour à l'image officielle : renommer `docker-compose.override.yml`, puis
+  `sudo docker compose up -d postiz`.
+
+Au premier démarrage, `prisma db push` a refusé d'ajouter une contrainte
+unique sur `mastra_experiment_results` (avertissement de perte de données,
+table vide) ; appliqué une fois à la main :
+`sudo docker compose run --rm --no-deps postiz sh -c "pnpm dlx prisma@6.5.0 db push --schema ./libraries/nestjs-libraries/src/database/prisma/schema.prisma --accept-data-loss --skip-generate"`.
+À refaire seulement après vérification que la table concernée ne contient
+pas de doublons.
 
 Côté RézoMwen, le client `rezomwen-program` (table `sso_clients`) déclare
 l'adresse de retour `https://program.rezomwen.fr/settings` ; le compte doit
