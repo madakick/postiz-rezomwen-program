@@ -1,4 +1,5 @@
-export const fallbackLng = 'en';
+// Rezomwen program : francais par defaut (navigateur sans langue reconnue).
+export const fallbackLng = 'fr';
 export const languages = [
   fallbackLng,
   'he',

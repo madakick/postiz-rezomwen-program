@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
+import { APP_NAME } from '@gitroom/helpers/utils/app.name';
 import { Metadata } from 'next';
 import { PlatformAnalytics } from '@gitroom/frontend/components/platform-analytics/platform.analytics';
-import { isGeneralServerSide } from '@gitroom/helpers/utils/is.general.server.side';
 export const metadata: Metadata = {
-  title: `${isGeneralServerSide() ? 'Postiz' : 'Gitroom'} Analytics`,
+  title: `${APP_NAME} Analytics`,
   description: '',
 };
 export default async function Index() {

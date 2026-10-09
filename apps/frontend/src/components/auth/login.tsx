@@ -16,6 +16,7 @@ import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { FarcasterProvider } from '@gitroom/frontend/components/auth/providers/farcaster.provider';
 import WalletProvider from '@gitroom/frontend/components/auth/providers/wallet.provider';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
+import { useSearchParams } from 'next/navigation';
 type Inputs = {
   email: string;
   password: string;
@@ -44,6 +45,8 @@ export function Login() {
     },
   });
   const fetchData = useFetch();
+  const searchParams = useSearchParams();
+  const autoSso = searchParams?.get('sso') === '1';
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     setNotActivated(false);
@@ -66,6 +69,25 @@ export function Login() {
       setLoading(false);
     }
   };
+  // Rezomwen program : seule la connexion par RezoMwen est proposee (ni
+  // formulaire local, ni inscription, ni mot de passe oublie).
+  if (isGeneral && genericOauth) {
+    return (
+      <div className="flex flex-col flex-1">
+        <div>
+          <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start cursor-pointer">
+            {t('sign_in', 'Sign In')}
+          </h1>
+        </div>
+        <div className="text-[14px] mt-[32px] mb-[12px]">
+          {t('continue_with', 'Continue With')}
+        </div>
+        <div className="flex flex-col">
+          <OauthProvider autoStart={autoSso} />
+        </div>
+      </div>
+    );
+  }
   return (
     <FormProvider {...form}>
       <form className="flex-1 flex" onSubmit={form.handleSubmit(onSubmit)}>

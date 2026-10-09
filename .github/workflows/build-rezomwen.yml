@@ -1,0 +1,59 @@
+---
+# Rezomwen program : image Docker du fork, construite a chaque push sur la
+# branche `rezomwen` (ou a la demande), amd64 seulement (VPS OVH), publiee
+# sur ghcr.io/madakick/postiz-rezomwen-program (:latest et :<sha>).
+# Sur le VPS : docker compose pull && docker compose up -d
+name: "Build Rezomwen program"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - rezomwen
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: build-rezomwen
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to ghcr
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.dev
+          platforms: linux/amd64
+          push: true
+          provenance: false
+          sbom: false
+          build-args: |
+            NEXT_PUBLIC_VERSION=rezomwen-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.title=Rezomwen program
+            org.opencontainers.image.licenses=AGPL-3.0
+          tags: |
+            ghcr.io/madakick/postiz-rezomwen-program:latest
+            ghcr.io/madakick/postiz-rezomwen-program:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

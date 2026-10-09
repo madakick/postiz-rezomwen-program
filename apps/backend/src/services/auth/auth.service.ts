@@ -38,6 +38,15 @@ export class AuthService {
     addToOrg?: boolean | { orgId: string; role: 'USER' | 'ADMIN'; id: string }
   ) {
     if (provider === Provider.LOCAL) {
+      // Rezomwen program : quand la connexion passe par RezoMwen
+      // (POSTIZ_GENERIC_OAUTH), comptes locaux refuses (connexion comme
+      // inscription). ALLOW_LOCAL_AUTH=true rouvre la porte en secours.
+      if (
+        process.env.POSTIZ_GENERIC_OAUTH &&
+        process.env.ALLOW_LOCAL_AUTH !== 'true'
+      ) {
+        throw new Error('Local login is disabled');
+      }
       if (process.env.DISALLOW_PLUS && body.email.includes('+')) {
         throw new Error('Email with plus sign is not allowed');
       }

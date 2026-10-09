@@ -3,7 +3,6 @@ import { getT } from '@gitroom/react/translation/get.translation.service.backend
 export const dynamic = 'force-dynamic';
 import { ReactNode } from 'react';
 import loadDynamic from 'next/dynamic';
-import { TestimonialComponent } from '@gitroom/frontend/components/auth/testimonial.component';
 import { LogoTextComponent } from '@gitroom/frontend/components/ui/logo-text.component';
 import { MantineWrapper } from '@gitroom/react/helpers/mantine.wrapper';
 import { Toaster } from '@gitroom/react/toaster/toaster';
@@ -28,13 +27,19 @@ export default async function AuthLayout({
           </div>
         </div>
         <div className="text-[36px] flex-1 pt-[88px] hidden lg:flex flex-col items-center">
-          <div className="text-center">
-            Over <span className="text-[42px] text-[#FC69FF]">20,000+</span>{' '}
-            Entrepreneurs use
+          {/* Rezomwen program : presentation du service a la place des
+              chiffres et temoignages de Postiz. */}
+          <div className="text-center max-w-[560px] px-[20px]">
+            Planifiez vos publications sur{' '}
+            <span className="text-[42px] text-[#d8ef2c]">tous vos réseaux</span>
             <br />
-            Postiz To Grow Their Social Presence
+            depuis un seul calendrier
+            <div className="text-[18px] text-white/70 mt-[24px] leading-[1.6]">
+              Instagram, Facebook, TikTok, YouTube, LinkedIn, X… Préparez vos
+              publications à l’avance, Rézomwen program les publie à l’heure
+              choisie.
+            </div>
           </div>
-          <TestimonialComponent />
         </div>
       </div>
     </MantineWrapper>

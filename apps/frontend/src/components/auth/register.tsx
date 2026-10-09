@@ -118,6 +118,7 @@ export function RegisterAfter({
     },
   });
   const fetchData = useFetch();
+  const oidcOnly = isGeneral && genericOauth;
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     await fetchData('/auth/register', {
@@ -153,6 +154,18 @@ export function RegisterAfter({
         });
       });
   };
+  // Rezomwen program : pas d'inscription locale, l'entree se fait par
+  // RezoMwen ; apres son retour, seul le nom de l'organisation est demande.
+  if (oidcOnly && !isAfterProvider) {
+    return (
+      <div className="flex flex-col flex-1">
+        <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start mb-[32px]">
+          {t('sign_in', 'Sign In')}
+        </h1>
+        <OauthProvider />
+      </div>
+    );
+  }
   return (
     <FormProvider {...form}>
       <form className="flex-1 flex" onSubmit={form.handleSubmit(onSubmit)}>
@@ -228,7 +241,7 @@ export function RegisterAfter({
                 )}
                 &nbsp;
                 <a
-                  href={`https://postiz.com/terms`}
+                  href={`https://rezomwen.fr/cgv`}
                   className="underline hover:font-bold"
                   rel="nofollow"
                 >
@@ -237,7 +250,7 @@ export function RegisterAfter({
                 &nbsp;
                 {t('and', 'and')}&nbsp;
                 <a
-                  href={`https://postiz.com/privacy`}
+                  href={`https://rezomwen.fr/confidentialite`}
                   rel="nofollow"
                   className="underline hover:font-bold"
                 >

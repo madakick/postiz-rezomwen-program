@@ -167,7 +167,7 @@ export const getMcpConfig = (
       case 'NanoClaw':
         return {
           config: `ncl groups config add-mcp-server --id <group-id> --name postiz --url ${oauthUrl}`,
-          hint: 'Run this in your terminal, replace <group-id> with the agent group that should get Postiz.',
+          hint: 'Run this in your terminal, replace <group-id> with the agent group that should get Rézomwen program.',
         };
     }
   }
@@ -266,7 +266,7 @@ export const getMcpConfig = (
       // No headers flag, the key travels inside the URL like remote clients
       return {
         config: `ncl groups config add-mcp-server --id <group-id> --name postiz --url ${mcpBase}/mcp/${apiKey}`,
-        hint: 'Run this in your terminal, replace <group-id> with the agent group that should get Postiz.',
+        hint: 'Run this in your terminal, replace <group-id> with the agent group that should get Rézomwen program.',
       };
   }
 };
@@ -362,7 +362,7 @@ const McpSection = ({
           {officialConnectors && (
             <>
               <a
-                className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+                className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
                 href={mcpConnectorUrls.Claude}
                 target="_blank"
               >
@@ -370,7 +370,7 @@ const McpSection = ({
                 {t('add_to_claude', 'Add to Claude')}
               </a>
               <a
-                className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+                className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
                 href={mcpConnectorUrls.ChatGPT}
                 target="_blank"
               >
@@ -380,7 +380,7 @@ const McpSection = ({
             </>
           )}
           <a
-            className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+            className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
             href="https://docs.postiz.com/mcp/introduction"
             target="_blank"
           >
@@ -403,7 +403,7 @@ const McpSection = ({
                   className={clsx(
                     'cursor-pointer px-[14px] h-[36px] text-[13px] font-[500] rounded-[8px] transition-colors',
                     tab === m
-                      ? 'bg-[#612BD3] text-white'
+                      ? 'bg-[#156177] text-white'
                       : 'bg-btnSimple text-customColor18 hover:bg-boxHover hover:text-textColor'
                   )}
                   onClick={() => setTab(m)}
@@ -411,7 +411,7 @@ const McpSection = ({
                   {m === 'official'
                     ? t('official_connector', 'Official connector')
                     : m === 'oauth'
-                    ? t('sign_in_no_api_key', 'Sign in with Postiz (no API key)')
+                    ? t('sign_in_no_api_key', 'Sign in with Rézomwen program (no API key)')
                     : t('api_key', 'API Key')}
                 </button>
               ))}
@@ -429,14 +429,14 @@ const McpSection = ({
                   )
                 : t(
                     'connector_onboarding_description',
-                    'The fastest way: add Postiz with one click, you will be asked to sign in'
+                    'The fastest way: add Rézomwen program with one click, you will be asked to sign in'
                   )}
             </div>
             <div className="flex flex-wrap gap-[8px]">
               {officialConnectorClients.map((client) => (
                 <a
                   key={client}
-                  className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[8px]"
+                  className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[8px]"
                   href={mcpConnectorUrls[client]}
                   target="_blank"
                 >
@@ -470,7 +470,7 @@ const McpSection = ({
                 className={clsx(
                   'cursor-pointer px-[14px] h-[36px] text-[13px] font-[500] rounded-[8px] transition-colors flex items-center gap-[8px]',
                   activeClient === client
-                    ? 'bg-[#612BD3] text-white'
+                    ? 'bg-[#156177] text-white'
                     : 'bg-btnSimple text-customColor18 hover:bg-boxHover hover:text-textColor'
                 )}
                 onClick={() =>
@@ -490,7 +490,7 @@ const McpSection = ({
               !chatOnly &&
               ` ${t(
                 'oauth_sign_in_hint',
-                'Your agent will open a browser window to sign in to Postiz.'
+                'Your agent will open a browser window to sign in to Rézomwen program.'
               )}`}
           </div>
           <pre className="bg-newBgColorInner border border-newBorder rounded-[8px] p-[16px] text-[13px] whitespace-pre-wrap break-all overflow-x-auto leading-[1.6]">
@@ -535,7 +535,7 @@ const McpSection = ({
             )}
             {activeClient === 'Claude' && officialConnectors && (
               <a
-                className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+                className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
                 href={mcpConnectorUrls.Claude}
                 target="_blank"
               >
@@ -545,7 +545,7 @@ const McpSection = ({
             )}
             {activeClient === 'ChatGPT' && officialConnectors && (
               <a
-                className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+                className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
                 href={mcpConnectorUrls.ChatGPT}
                 target="_blank"
               >
@@ -555,7 +555,7 @@ const McpSection = ({
             )}
             {activeClient === 'Grok Bot' && officialConnectors && (
               <a
-                className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+                className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
                 href={mcpConnectorUrls['Grok Bot']}
                 target="_blank"
               >
@@ -642,7 +642,7 @@ const CliSection = ({ apiKey }: { apiKey: string }) => {
         </div>
         <div className="flex flex-wrap gap-[6px] shrink-0 pt-[2px]">
           <a
-            className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+            className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
             href="https://docs.postiz.com/cli/introduction"
             target="_blank"
           >
@@ -660,7 +660,7 @@ const CliSection = ({ apiKey }: { apiKey: string }) => {
               className={clsx(
                 'cursor-pointer px-[14px] h-[36px] text-[13px] font-[500] rounded-[8px] transition-colors',
                 mode === m
-                  ? 'bg-[#612BD3] text-white'
+                  ? 'bg-[#156177] text-white'
                   : 'bg-btnSimple text-customColor18 hover:bg-boxHover hover:text-textColor'
               )}
               onClick={() => setMode(m)}
@@ -770,7 +770,7 @@ const PublicApiContent = () => {
         <br />
         {t(
           'api_auth_note_line2',
-          'If you are building a product that schedules posts on behalf of other Postiz users,'
+          'If you are building a product that schedules posts on behalf of other Rézomwen program users,'
         )}
         <br />
         {t(
@@ -798,7 +798,7 @@ const PublicApiContent = () => {
           </div>
           <div className="flex flex-wrap gap-[6px] shrink-0 pt-[2px]">
             <a
-              className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+              className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
               href="https://docs.postiz.com/public-api"
               target="_blank"
             >
@@ -806,7 +806,7 @@ const PublicApiContent = () => {
             {t('read_the_docs', 'Docs')}
             </a>
             <a
-              className="cursor-pointer px-[16px] h-[36px] bg-[#612BD3] hover:bg-[#5520CB] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
+              className="cursor-pointer px-[16px] h-[36px] bg-[#156177] hover:bg-[#0f4f62] text-white transition-colors rounded-[8px] text-[13px] font-[600] flex items-center gap-[6px]"
               href="https://www.npmjs.com/package/n8n-nodes-postiz"
               target="_blank"
             >

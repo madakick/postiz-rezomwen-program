@@ -85,7 +85,7 @@ export const OAuthSelfHosted: FC<{
       </div>
 
       {/* plain text fields: a password field makes browsers autofill the
-          saved Postiz login (email + password) into this form */}
+          saved Rézomwen program login (email + password) into this form */}
       <Input
         name="instance_url"
         label="Instance URL"
@@ -144,7 +144,7 @@ export const OAuthSelfHosted: FC<{
           disabled={
             submitting || !instanceUrl.trim() || (askEmail && !email.trim())
           }
-          className="flex-1 bg-[#612BD3] hover:bg-[#7B3FF2] disabled:opacity-50 text-white rounded-[8px] py-[10px] px-[16px] text-[14px] font-semibold transition-colors"
+          className="flex-1 bg-[#156177] hover:bg-[#1b7690] disabled:opacity-50 text-white rounded-[8px] py-[10px] px-[16px] text-[14px] font-semibold transition-colors"
         >
           {submitting ? 'Connecting...' : 'Connect'}
         </button>

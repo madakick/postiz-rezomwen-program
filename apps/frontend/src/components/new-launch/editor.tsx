@@ -430,7 +430,7 @@ export const EditorWrapper: FC<{
           onClick={goBackToGlobal}
         >
           <div className="flex gap-[6px] items-center mobile:hidden">
-            <div className="w-[8px] h-[8px] rounded-full bg-[#FC69FF]" />
+            <div className="w-[8px] h-[8px] rounded-full bg-[#d8ef2c]" />
             <div className="text-[14px] font-[600]">
               {t('editing_a_specific_network', 'Editing a Specific Network')}
             </div>
